@@ -1,2 +1,2 @@
 # epn-api-php
-php lib to use epn API
+php lib to use epn API.
