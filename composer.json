@@ -1,0 +1,29 @@
+{
+  "name": "misikch/epn-api-php",
+  "description": "Php library to work with ePN API2",
+  "license": "MIT",
+  "keywords": ["ePN", "client"],
+  "homepage": "https://app.epn.bz/swagger/redoc?v=2",
+  "authors": [
+    {
+      "name": "Sergey Maslovskiy",
+      "email": "misikch@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "ext-json": "*",
+    "php-http/httplug": "^2.1"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Misikch\\Epn\\Api\\Client\\": "src/"
+    }
+  },
+  "scripts": {
+  },
+  "extra": {
+  }
+}
