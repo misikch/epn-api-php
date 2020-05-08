@@ -2,6 +2,7 @@
 
 namespace Misikch\Epn\Api\Client;
 
+use Misikch\Epn\Api\Client\Config\Config;
 use Misikch\Epn\Api\Client\Exceptions\EpnApiException;
 
 class ClientBuilder
@@ -32,6 +33,11 @@ class ClientBuilder
     private $apiVersion = '2';
 
     /**
+     * @var array
+     */
+    private $config;
+
+    /**
      * @var string[]
      */
     private $availableApiVersions = ['2', '2.1'];
@@ -39,6 +45,8 @@ class ClientBuilder
     public function __construct()
     {
         $this->epnClient = new Client();
+
+        $this->setDefaultConfig();
     }
 
     /**
@@ -63,6 +71,10 @@ class ClientBuilder
         return $this;
     }
 
+    /**
+     * @param string $locale
+     * @return $this
+     */
     public function setLocale(string $locale): self
     {
         $this->locale = $locale;
@@ -70,6 +82,11 @@ class ClientBuilder
         return $this;
     }
 
+    /**
+     * @param string $apiVersion
+     * @return $this
+     * @throws EpnApiException
+     */
     public function setApiVersion(string $apiVersion): self
     {
         if (! in_array($apiVersion, $this->availableApiVersions)) {
@@ -80,6 +97,19 @@ class ClientBuilder
         $this->apiVersion = $apiVersion;
 
         return $this;
+    }
+
+    /**
+     * @param array $config
+     * @throws EpnApiException
+     */
+    public function setConfig(array $config)
+    {
+        if (empty($config['api_url'] || empty($config['oauth_url']))) {
+            throw new EpnApiException("config required params 'api_url', 'oauth_url'");
+        }
+
+        $this->config = $config;
     }
 
     /**
@@ -99,6 +129,13 @@ class ClientBuilder
         $client->setApiVersion($this->apiVersion);
         $client->setLocale($this->locale);
 
+        $client->setConfig(new Config($this->config));
+
         return $client;
+    }
+
+    private function setDefaultConfig()
+    {
+        $this->config = require(__DIR__ . '/Config/main.php');
     }
 }

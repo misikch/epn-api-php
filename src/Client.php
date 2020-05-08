@@ -2,6 +2,8 @@
 
 namespace Misikch\Epn\Api\Client;
 
+use Misikch\Epn\Api\Client\Config\Config;
+
 class Client
 {
     /**
@@ -25,14 +27,14 @@ class Client
     private $apiVersion;
 
     /**
-     * @var array
+     * @var Config
      */
     private $config;
 
     /**
      * @param string $clientId
      */
-    public function setClientId(string $clientId): void
+    public function setClientId(string $clientId)
     {
         $this->clientId = $clientId;
     }
@@ -40,7 +42,7 @@ class Client
     /**
      * @param string $clientSecret
      */
-    public function setClientSecret(string $clientSecret): void
+    public function setClientSecret(string $clientSecret)
     {
         $this->clientSecret = $clientSecret;
     }
@@ -48,7 +50,7 @@ class Client
     /**
      * @param string $locale
      */
-    public function setLocale(string $locale): void
+    public function setLocale(string $locale)
     {
         $this->locale = $locale;
     }
@@ -56,15 +58,15 @@ class Client
     /**
      * @param string $apiVersion
      */
-    public function setApiVersion(string $apiVersion): void
+    public function setApiVersion(string $apiVersion)
     {
         $this->apiVersion = $apiVersion;
     }
 
     /**
-     * @param array $config
+     * @param Config $config
      */
-    public function setConfig(array $config): void
+    public function setConfig(Config $config)
     {
         $this->config = $config;
     }
